@@ -4,6 +4,8 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { setField, resetState } from './redux';
 
+import Input from './Input';
+
 const closeTime = moment('2018-04-01 12:00');
 
 class App extends Component {
@@ -23,49 +25,27 @@ class App extends Component {
   }
 
   render() {
-    // eslint-disable-next-line
     const { name, email, ticketType, food, agreeTerm, countdown, setField, resetState } = this.props;
     return (
       <section className="section">
         <div className="container">
           <h1 className="title">Evenn Registration Form</h1>
           <p>Registration will be close in {countdown}</p>
-          <div className="field">
-            <label className="label"> Name </label>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                placeholder="Text input"
-                value={name}
-                onChange={(e) => setField('name', e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="field">
-            <label className="label"> Email </label>
-            <div className="control has-icons-left has-icons-right">
-              <input
-                className="input is-danger"
-                type="email"
-                placeholder="Email input"
-                value={email}
-                onChange={(e) => setField('email', e.target.value)}
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-envelope" />
-              </span>
-              <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle" />
-              </span>
-            </div>
-            <p className="help is-danger"> This email is invalid </p>
-          </div>
+          <Input value={name} onChange={(value) => setField('name', value)} placeholder="e.g. John Doe" label="Name" />
+          <Input
+            type="email"
+            value={email}
+            onChange={(value) => setField('email', value)}
+            placeholder="e.g. hello@react.org"
+            label="Email"
+            error="This email is invalid"
+            icon="envelope"
+          />
           <div className="field">
             <label className="label"> Ticket Type </label>
             <div className="control">
               <div className="select">
-                <select onChange={(e) => setField('ticketType', e.target.value)}>
+                <select value={ticketType} onChange={(e) => setField('ticketType', e.target.value)}>
                   <option value=""> Select type... </option>
                   <option value="regular"> Regular - 100THB </option>
                   <option value="premium"> Premium - 300THB </option>
@@ -116,5 +96,14 @@ class App extends Component {
     );
   }
 }
+
+// Compact
+// const mapDispatchToProps = { setField, resetState };
+
+// Full
+// const mapDispatchToProps = (dispatch) => ({
+//   setField: (key, value) => dispatch(setField(key, value)),
+//   resetField: () => dispatch(resetState())
+// });
 
 export default connect((state) => state, { setField, resetState })(App);
