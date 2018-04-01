@@ -4,11 +4,16 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.6.2",
+    "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "mocha": "^5.0.5",
     "moment": "^2.22.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.1",
+    "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-promise-middleware": "^5.0.0"
   },
@@ -21,7 +26,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "mocha -r ignore-styles -r babel-core/register -- exit test",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "ignore-styles": "^5.0.1"
   }
 }
